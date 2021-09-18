@@ -1,6 +1,6 @@
 class PolyTreeNode
 
-  attr_reader :parent, :children, :value
+  attr_accessor :parent, :children, :value
 
   def initialize(value)
     @value = value
@@ -8,9 +8,16 @@ class PolyTreeNode
     @children = []
   end
 
+  def inspect
+    "#<PolyTreeNode: @value=#{value}, @parent=#{parent}, @children=#{children}"
+  end
+
   def parent=(value)
-    parent = value
+    @parent = value
     parent.children.push(self) if !parent.nil?
+    if self.parent != nil
+      self.parent.children.delete(self)
+    end
   end
 
 end
