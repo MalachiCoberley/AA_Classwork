@@ -12,12 +12,14 @@ class PolyTreeNode
     "#<PolyTreeNode: @value=#{value}, @parent=#{parent}, @children=#{children}"
   end
 
-  def parent=(value)
-    @parent = value
-    parent.children.push(self) if !parent.nil?
-    if self.parent != nil
-      self.parent.children.delete(self)
+  def parent=(parent)
+    # self.parent.children.delete(self)
+    @parent = parent
+    if !parent.nil? && !self.parent.children.include?(self)
+      self.parent.children.push(self)
     end
   end
+
+
 
 end
