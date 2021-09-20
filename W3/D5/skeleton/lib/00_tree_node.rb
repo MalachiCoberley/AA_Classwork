@@ -13,13 +13,31 @@ class PolyTreeNode
   end
 
   def parent=(parent)
-    # self.parent.children.delete(self)
+    old_parents_child = self.parent.children if !self.parent.nil?
+    old_parents_child.delete(self) if !old_parents_child.nil?
     @parent = parent
     if !parent.nil? && !self.parent.children.include?(self)
       self.parent.children.push(self)
     end
   end
 
+  def add_child(child_node)
+    child_node.parent = self
+  end
+
+  def remove_child(child_node)
+    child_node.parent = nil
+    raise "Node is not a child" if !self.children.include?(child_node)
+  end
 
 
 end
+
+
+# node1 = PolyTreeNode.new('root') 
+# node2 = PolyTreeNode.new('child1') 
+# node3 = PolyTreeNode.new('child2')
+
+# node2.parent = node1
+# node3.parent = node1
+# node3.parent = node2
