@@ -1,3 +1,4 @@
+require "byebug"
 class PolyTreeNode
 
   attr_accessor :parent, :children, :value
@@ -45,17 +46,25 @@ class PolyTreeNode
     array = []
     array << self
     until array.empty?
-      
+      node = array.shift
+      return node if node.value == target_value
+      array.concat(node.children)
     end
+    nil
   end
 
 end
 
 
+
+
 # node1 = PolyTreeNode.new('root') 
 # node2 = PolyTreeNode.new('child1') 
 # node3 = PolyTreeNode.new('child2')
+# node4 = PolyTreeNode.new('child3')
 
-# node2.parent = node1
-# node3.parent = node1
-# node3.parent = node2
+# p node2.parent = node1
+# p node3.parent = node1
+# p node3.parent = node2
+# p node4.parent = node2
+# node1.bfs('child3')
