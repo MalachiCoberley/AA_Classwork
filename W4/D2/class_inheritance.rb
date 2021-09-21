@@ -29,7 +29,11 @@ class Manager < Employee
     total_salary = 0
     @employees.each do |employee|
       if employee.is_a?(Manager)
-      total_salary += employee.salary
+        total_salary += employee.salary
+        total_salary += employee.bonus(1)
+      else
+        total_salary += employee.salary
+      end
     end
     total_salary * multiplier
   end
@@ -44,6 +48,9 @@ ned = Manager.new("Ned", "Founder", 1000000, nil, [darren])
 shawna.boss = darren
 david.boss = darren
 darren.boss = ned
+
+p david.is_a?(Manager)
+
 
 p ned.bonus(5) # => 500_000
 p darren.bonus(4) # => 88_000
