@@ -59,10 +59,17 @@ def largest_contiguous_subsum(list)
     curr_sum = list[i..-1].drop(i).sum #drop from back
     max_sum = curr_sum if curr_sum > max_sum
 
+    curr_sum = list[i..-i].take(i).sum #take from front
+    max_sum = curr_sum if curr_sum > max_sum
+
+    curr_sum = list[i..-i].drop(i).sum #drop from back
+    max_sum = curr_sum if curr_sum > max_sum
+
     i += 1
   end
   max_sum
 end
 
-list = [5, 3, -7, -3, 3, 4, 5]
+# list = [5, 3, -7, -3, 3, 4, 5, -8]
+list = [2, 3, -6, 7, -6, 7]
 p largest_contiguous_subsum(list)
