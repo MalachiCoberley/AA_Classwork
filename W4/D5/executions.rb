@@ -32,18 +32,6 @@ end
 
 #phase 2
 def largest_contiguous_subsum(list)
-  # hash = Hash.new(0)
-  # max_sum = 0
-  # list.each_with_index do |el, i|
-  #   hash[i] = el
-  # end
-  # hash.each do |idx, num|
-  #   curr_sum = 0
-
-  #   curr_sum += num if 
-
-  # end
-
   max_sum = 0
   i = 0
   while i < list.size
@@ -70,6 +58,9 @@ def largest_contiguous_subsum(list)
   max_sum
 end
 
-# list = [5, 3, -7, -3, 3, 4, 5, -8]
-list = [2, 3, -6, 7, -6, 7]
-p largest_contiguous_subsum(list)
+list1 = [5, 3, -7, -3, 3, 4, 5, -8] #12
+list2 = [2, 3, -6, 7, -6, 7] #8
+list3 = [-1, 2, -3, 7, -1, 6, -3] #12
+p largest_contiguous_subsum(list1)
+p largest_contiguous_subsum(list2)
+p largest_contiguous_subsum(list3)
