@@ -82,9 +82,14 @@ class ResizingIntSet
   end
 
   def remove(num)
+    if self.include?(num)
+      @store[num % @store.length].delete(num)
+      @count -= 1
+    end
   end
 
   def include?(num)
+    resize! if @count >= @store.length
     @store[num % @store.length].each {|el| return true if el == num}
     false
   end
@@ -100,5 +105,12 @@ class ResizingIntSet
   end
 
   def resize!
+    elements = []
+    @store.each do |bucket|
+       bucket.each do |el|
+
+      end
+    end
   end
+
 end
