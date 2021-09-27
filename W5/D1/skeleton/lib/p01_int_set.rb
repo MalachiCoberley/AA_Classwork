@@ -105,12 +105,12 @@ class ResizingIntSet
   end
 
   def resize!
-    elements = []
-    @store.each do |bucket|
-       bucket.each do |el|
-
-      end
+    elements = Array.new(@store.length * 2) {Array.new}
+    @store.flatten!
+    @store.each do |el|
+       elements[el % elements.length] << el
     end
+    @store = elements
   end
 
 end
