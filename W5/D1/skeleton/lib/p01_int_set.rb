@@ -43,12 +43,16 @@ class IntSet
   end
 
   def insert(num)
+    @store[num % @store.length] << num
   end
 
   def remove(num)
+    @store[num % @store.length].delete(num)
   end
 
   def include?(num)
+    @store[num % @store.length].each {|el| return true if el == num}
+    false
   end
 
   private
@@ -71,12 +75,18 @@ class ResizingIntSet
   end
 
   def insert(num)
+    if !self.include?(num)
+      @store[num % @store.length] << num
+      @count += 1
+    end
   end
 
   def remove(num)
   end
 
   def include?(num)
+    @store[num % @store.length].each {|el| return true if el == num}
+    false
   end
 
   private
