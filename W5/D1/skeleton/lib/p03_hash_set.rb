@@ -7,12 +7,21 @@ class HashSet
   end
 
   def insert(key)
+    resize! if @count >= @store.length
+    @store[key.hash % @store.length] << key
+    @count += 1
   end
 
   def include?(key)
+    @store[key.hash % @store.length].each {|el| return true if el == key}
+    false
   end
 
   def remove(key)
+    return if !self.include?(key)
+    @store[key.hash % @store.length].delete(key)
+    @count -= 1
+    
   end
 
   private
@@ -26,5 +35,11 @@ class HashSet
   end
 
   def resize!
+    elements = Array.new(@store.length * 2) {Array.new}
+    @store.flatten!
+    @store.each do |el|
+       elements[el.hash % elements.length] << el
+    end
+    @store = elements
   end
 end
