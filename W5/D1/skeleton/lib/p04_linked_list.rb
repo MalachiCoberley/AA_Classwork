@@ -65,13 +65,20 @@ class LinkedList
   end
 
   def update(key, val)
+    self.each do |node|
+      node.val = val if key == node.key
+    end
   end
 
   def remove(key)
   end
 
-  def each
-    
+  def each(&prc)
+    current_node = @head.next
+    until current_node == @tail
+      prc.call(current_node) 
+      current_node = current_node.next
+    end
   end
 
   # uncomment when you have `each` working and `Enumerable` included
