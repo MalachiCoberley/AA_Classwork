@@ -70,7 +70,7 @@ end
 #Start of Question Class ------------------------------------------
 
 class Question
-  attr_accessor :title, :body, :user_id
+  attr_accessor :id, :title, :body, :user_id
 
   def self.all
     data = QuestionsDatabase.instance.execute("SELECT * FROM questions")
@@ -110,11 +110,20 @@ class Question
   end
 
   def author
-
+    user = QuestionsDatabase.instance.execute(<<-SQL, self.user_id)
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ?
+    SQL
+    User.new(user.first)
   end
 
   def replies
     #use Reply::find_by_question_id
+    Reply.find_by_question_id(self.id)
   end
 
 end
@@ -163,7 +172,7 @@ class Reply
     FROM
       replies
     WHERE
-      question_id = ?
+      subject_question_id = ?
     SQL
 
     replies.map { |reply| Reply.new(reply)}
@@ -179,11 +188,27 @@ class Reply
   end
 
   def author
-
+    user = QuestionsDatabase.instance.execute(<<-SQL, self.user_id)
+    SELECT
+      *
+    FROM
+      users
+    WHERE
+      id = ?
+    SQL
+    User.new(user.first)
   end
 
   def question
-
+    question = QuestionsDatabase.instance.execute(<<-SQL, self.subject_question_id)
+    SELECT
+      *
+    FROM
+      questions
+    WHERE
+      id = ?
+    SQL
+    Question.new(question.first)
   end
 
   def parent_reply
