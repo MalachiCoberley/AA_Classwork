@@ -55,10 +55,14 @@ class User
 
   def authored_questions
     #this will use Question::find_by_author_id
+
+    Question.find_by_author_id(self.id)
   end
 
   def authored_replies
     #this will use Reply::find_by_user_id
+
+    Reply.find_by_user_id(self.id)
   end
 
 end
@@ -87,7 +91,7 @@ class Question
   end
 
   def self.find_by_author_id(user_id)
-    question = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, user_id)
     SELECT
      *
     FROM
@@ -95,7 +99,7 @@ class Question
     WHERE
       user_id = ?
     SQL
-    Question.new(question.first)
+    questions.map {|question| Question.new(question)}
   end
 
   def initialize(options)
@@ -140,7 +144,7 @@ class Reply
   end
 
   def self.find_by_user_id(user_id)
-    reply = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    replies = QuestionsDatabase.instance.execute(<<-SQL, user_id)
       SELECT
         *
       FROM
@@ -149,7 +153,7 @@ class Reply
         user_id = ?
     SQL
 
-    Reply.new(reply.first)
+    replies.map { |reply| Reply.new(reply) }
   end
 
   def self.find_by_question_id(question_id)
@@ -167,8 +171,11 @@ class Reply
 
   def initialize(options)
     @id = options['id']
-    @fname = options['fname']
-    @lname = options['lname']
+    @subject_question_id = options['subject_question_id']
+    @reply_to_id = options['reply_to_id']
+    @user_id = options['user_id']
+    @body = options['body']
+
   end
 
   def author
