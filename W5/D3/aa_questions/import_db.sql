@@ -1,5 +1,7 @@
 PRAGMA foreign_keys = ON;
 
+--Users table
+
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -8,6 +10,8 @@ CREATE TABLE users (
   lname VARCHAR(120) NOT NULL
 
 );
+
+-- Questions table
 
 DROP TABLE IF EXISTS questions;
 
@@ -20,6 +24,8 @@ CREATE TABLE questions (
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
+-- Question_follows table
+
 DROP TABLE IF EXISTS question_follows;
 
 CREATE TABLE question_follows (
@@ -30,6 +36,9 @@ CREATE TABLE question_follows (
   FOREIGN KEY (user_id) REFERENCES users(id),
   FOREIGN KEY (question_id) REFERENCES questions(id)
 );
+
+
+--REPLIES
 
 DROP TABLE IF EXISTS replies;
 

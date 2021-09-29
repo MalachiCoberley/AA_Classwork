@@ -65,6 +65,10 @@ class User
     Reply.find_by_user_id(self.id)
   end
 
+  def self.followed_questions
+    #oneliner calling QuestionFollow method
+  end
+
 end
 
 #Start of Question Class ------------------------------------------
@@ -124,6 +128,10 @@ class Question
   def replies
     #use Reply::find_by_question_id
     Reply.find_by_question_id(self.id)
+  end
+
+  def followers
+    #one-line calling QuestionFolow method
   end
 
 end
@@ -212,11 +220,58 @@ class Reply
   end
 
   def parent_reply
-
+    reply = QuestionsDatabase.instance.execute(<<-SQL, self.reply_to_id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        id = ?
+    SQL
+    Reply.new(reply.first)
   end
 
   def child_replies
     # Only do child replies one-deep; don't find grandchild comments.
+    replies = QuestionsDatabase.instance.execute(<<-SQL, self.id)
+      SELECT
+        *
+      FROM
+        replies
+      WHERE
+        reply_to_id = ? 
+    SQL
+    replies.map { |reply| Reply.new(reply)}
   end
 
+end
+
+class QuestionFollow
+
+  def self.followers_for_question_id(question_id)
+    #this will return an array of User objects
+    followers = QuestionsDatabase.instance.execute(<<-SQL, question_id)
+      SELECT
+        users.*
+      FROM
+        users 
+      JOIN
+        question_follows
+      ON
+        user_id = users.id 
+      WHERE
+        question_id = ?
+    SQL
+    followers.map {|follower| User.new(follower)}
+  end
+
+  def self.followed_questions_for_user_id(user_id)
+    #returns an array of question objects
+    QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    SQL
+  end
+
+
+
+ 
 end
