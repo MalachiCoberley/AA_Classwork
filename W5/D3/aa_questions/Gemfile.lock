@@ -4,6 +4,7 @@ GEM
     sqlite3 (1.4.2)
 
 PLATFORMS
+  x86_64-darwin-19
   x86_64-linux
 
 DEPENDENCIES
