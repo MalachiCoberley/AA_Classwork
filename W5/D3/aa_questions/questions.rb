@@ -67,11 +67,23 @@ class User
   end
 
   def liked_questions
-
+    QuestionLike.liked_questions_for_user_id(self.id)
   end
 
   def average_karma
+    avg_karma_arr = QuestionsDatabase.instance.execute(<<-SQL, self.id)
+    SELECT 
+      CAST(COUNT(question_likes.user_id) AS FLOAT) / COUNT(DISTINCT(questions.id))  
+    FROM 
+      questions 
+    LEFT JOIN 
+      question_likes 
+    ON 
+      questions.id = question_likes.question_id 
+    WHERE questions.user_id = ?
+    SQL
 
+    avg_karma_arr.first.values.first
   end
 
 end
@@ -116,7 +128,7 @@ class Question
   end
 
   def self.most_liked(n)
-
+    QuestionLike.most_liked_questions(n)
   end
 
   def initialize(options)
@@ -147,11 +159,11 @@ class Question
   end
 
   def likers
-
+    QuestionLike.likers_for_questions_id(self.id)
   end
 
   def num_likes
-
+    QuestionLike.num_likes_for_question_id(self.id)
   end
 
 end
@@ -362,11 +374,39 @@ class QuestionLike
   end
 
   def self.liked_questions_for_user_id(user_id)
-
+    questions = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    SELECT
+      questions.*
+    FROM
+      questions
+    JOIN
+      question_likes
+    ON
+      questions.id = question_likes.question_id
+    WHERE
+      question_likes.user_id = ?
+    SQL
+    questions.map { |question| Question.new(question)}
   end
 
   def self.most_liked_questions(n)
-
+    questions = QuestionsDatabase.instance.execute(<<-SQL, n)
+    SELECT
+      questions.*
+    FROM
+      questions
+    JOIN
+      question_likes
+    ON
+      questions.id = question_likes.question_id
+    GROUP BY
+      question_likes.question_id
+    ORDER BY
+      COUNT(question_likes.question_id) DESC
+    LIMIT
+      ?
+    SQL
+    questions.map { |question| Question.new(question)}
   end
 
 end
