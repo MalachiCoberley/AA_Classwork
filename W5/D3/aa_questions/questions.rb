@@ -54,19 +54,24 @@ class User
   end
 
   def authored_questions
-    #this will use Question::find_by_author_id
-
     Question.find_by_author_id(self.id)
   end
 
   def authored_replies
-    #this will use Reply::find_by_user_id
-
     Reply.find_by_user_id(self.id)
   end
 
-  def self.followed_questions
+  def followed_questions
     #oneliner calling QuestionFollow method
+    QuestionFollow.followed_questions_for_user_id(self.id)
+  end
+
+  def liked_questions
+
+  end
+
+  def average_karma
+
   end
 
 end
@@ -106,6 +111,14 @@ class Question
     questions.map {|question| Question.new(question)}
   end
 
+  def self.most_followed(n)
+
+  end
+
+  def self.most_liked(n)
+
+  end
+
   def initialize(options)
     @id = options['id']
     @title = options['title']
@@ -126,12 +139,19 @@ class Question
   end
 
   def replies
-    #use Reply::find_by_question_id
     Reply.find_by_question_id(self.id)
   end
 
   def followers
-    #one-line calling QuestionFolow method
+    QuestionFollow.followers_for_question_id(self.id)
+  end
+
+  def likers
+
+  end
+
+  def num_likes
+
   end
 
 end
@@ -246,6 +266,8 @@ class Reply
 
 end
 
+# QuestionFollows class-------------------------------------------------
+
 class QuestionFollow
 
   def self.followers_for_question_id(question_id)
@@ -258,7 +280,7 @@ class QuestionFollow
       JOIN
         question_follows
       ON
-        user_id = users.id 
+        users.id = user_id
       WHERE
         question_id = ?
     SQL
@@ -267,11 +289,46 @@ class QuestionFollow
 
   def self.followed_questions_for_user_id(user_id)
     #returns an array of question objects
-    QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    questions = QuestionsDatabase.instance.execute(<<-SQL, user_id)
+    SELECT
+      questions.*
+    FROM
+      questions
+    JOIN
+      question_follows
+    ON
+      questions.id = question_id
+    WHERE
+      question_follows.user_id = ?
     SQL
+    questions.map {|question| Question.new(question)}
   end
 
-
-
+  def self.most_followed_questions(n)
+    # Fetches the n most followed questions.
+  end
  
+end
+
+
+# QuestionLike class-------------------------------------------------
+
+class QuestionLike
+
+  def self.likers_for_questions_id(question_id)
+
+  end
+
+  def self.num_likes_for_question_id(question_id)
+    # dont just use question liker for question ID and count, do a SQL query
+  end
+
+  def self.liked_questions_for_user_id(user_id)
+
+  end
+
+  def self.most_liked_questions(n)
+
+  end
+
 end
