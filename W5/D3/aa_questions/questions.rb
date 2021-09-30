@@ -1,5 +1,10 @@
 require 'sqlite3'
 require 'singleton'
+require 'user'
+require 'question'
+require 'reply'
+require 'question_follow'
+require 'question_like'
 
 class QuestionsDatabase < SQLite3::Database
   include Singleton
@@ -86,6 +91,17 @@ class User
     avg_karma_arr.first.values.first
   end
 
+  def save
+    raise "#{self} already in database" if self.id
+    QuestionsDatabase.instance.execute(<<-SQL, self.fname, self.lname)
+    INSERT INTO
+      users(fname, lname)
+    VALUES
+      (?, ?)    
+    SQL
+    self.id = QuestionsDatabase.instance.last_insert_row_id
+  end
+
 end
 
 #Start of Question Class ------------------------------------------
@@ -164,6 +180,17 @@ class Question
 
   def num_likes
     QuestionLike.num_likes_for_question_id(self.id)
+  end
+
+  def save
+    raise "#{self} already in database" if self.id
+    QuestionsDatabase.instance.execute(<<-SQL, self.title, self.body, self.user_id)
+    INSERT INTO
+      questions(title, body, user_id)
+    VALUES
+      (?, ?, ?)    
+    SQL
+    self.id = QuestionsDatabase.instance.last_insert_row_id
   end
 
 end
@@ -274,6 +301,17 @@ class Reply
         reply_to_id = ? 
     SQL
     replies.map { |reply| Reply.new(reply)}
+  end
+
+  def save
+    raise "#{self} already in database" if self.id
+    QuestionsDatabase.instance.execute(<<-SQL, self.subject_question_id, self.reply_to_id, self.user_id, self.body)
+    INSERT INTO
+      replies(subject_question_id, reply_to_id, user_id, body)
+    VALUES
+      (?, ?, ?, ?)    
+    SQL
+    self.id = QuestionsDatabase.instance.last_insert_row_id
   end
 
 end
