@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  validates :password, length: { minimum: 6, too_short: "Password must be at least six characters" }
 
   self.find_by_credentials(username, password)
     user = User.find_by(username: username)
