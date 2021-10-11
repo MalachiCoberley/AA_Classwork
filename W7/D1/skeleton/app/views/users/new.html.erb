@@ -1,0 +1,18 @@
+<form action="<%= users_url %>" method="post">
+
+    <label for="username">Username</label>
+    <input
+        type="text"
+        name="user[username]"
+        id="username"
+        value="Must be at least 6 chars">
+
+    <label for="password">Password</label>
+    <input
+        type = "password"
+        name = "user[password]"
+        id = "password"
+        value = "">
+
+    <input type = "submit" value = "Create User">
+</form>

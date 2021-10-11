@@ -1,12 +1,15 @@
 class User < ApplicationRecord
-  validates :password, length: { minimum: 6, too_short: "Password must be at least six characters" }
 
-  self.find_by_credentials(username, password)
+  attr_reader :password
+  validates :password, allow_nil: true, length: { minimum: 6, too_short: "Password must be at least six characters" }
+  after_initialize :reset_session_token!
+
+  def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     if user && user.is_valid_password?(password)
-      return user
+      user
     else
-      return nil
+      nil
     end
   end
 
