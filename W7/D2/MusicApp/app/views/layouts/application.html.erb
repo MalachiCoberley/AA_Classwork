@@ -8,8 +8,18 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
+    <header>
+      <form action="<% session_url %>" method="post">
+        <% if logged_in? %> 
+          <input type="hidden" name="_method" value="delete">
+          <input type="submit" value="Logout">
+        <% else %>
+          <a href="<% new_session_url %>" value="Login">Log In</a>
+        <% end %>
+      </form>
+    </header>
+
     <%= yield %>
   </body>
 </html>
