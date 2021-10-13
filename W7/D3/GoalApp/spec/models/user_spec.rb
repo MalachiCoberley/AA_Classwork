@@ -14,6 +14,7 @@ require 'rails_helper'
 # session_token: "abc123", password_digest: "123abc"
 
 RSpec.describe User, type: :model do
+
   subject(:malachi) {User.create!(username: "malachi", password: "abc123")}
   it { should validate_presence_of(:username) }
   it { should validate_uniqueness_of(:username) }
@@ -21,4 +22,20 @@ RSpec.describe User, type: :model do
   it { should validate_presence_of(:password_digest) }
   it { should validate_length_of(:password).is_at_least(6) }
   
+  describe 'find users by credentials' do
+    context 'valid credentials'
+      it 'return correct user' do
+        jamie = User.create!(username: 'jamie', password: '123456')
+        user = User.find_by_credentials('jamie', '123456')
+        expect(jamie.username).to eq(user.username)
+        expect(jamie.password_digest).to eq(user.password_digest)
+      end
+
+      it 'return nil when credentials are invalid' do
+        jamie = User.create!(username: 'jamie', password: '123456')
+        user = User.find_by_credentials('jamoo', '123456')
+        expect(user).to be(nil)
+      end
+  end
+
 end
