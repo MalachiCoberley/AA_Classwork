@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_no_user!
-    redirect_to albums_url if current_user
+    redirect_to bands_url if current_user
   end
 
 end

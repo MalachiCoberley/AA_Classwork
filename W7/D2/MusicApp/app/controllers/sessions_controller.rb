@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     )
     if user
       login_user!(user)
-      redirect_to albums_url
+      redirect_to bands_url
     else
         flash.now[:errors] = ["Invalid password and/or username"]
         render :new
