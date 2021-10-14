@@ -2,11 +2,27 @@
 .gear-dropdown {
   font-family: $sans-serif;
   color: $dark-gray;
+  
   > li {
     display: none;
   }
+
+
+}
+
+#gear-dropdown {
+  position: absolute;
+  background-color: white;
+  top: 25px;
+  z-index: 6;
 }
 
 .gear-dropdown:hover li{
   display: flex;
+
+}
+
+.help > li {
+  color: $blue;
+  display: none;
 }
