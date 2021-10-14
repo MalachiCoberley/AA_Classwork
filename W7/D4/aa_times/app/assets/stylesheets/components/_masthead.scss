@@ -25,8 +25,15 @@
 	}
 
 	ul {
+
+		li:first-of-type {
+			font-weight: bold;
+		}
+
 		display: flex;
 	}
+
+
 }
 
 .logo {
@@ -36,10 +43,21 @@
 
 .masthead-links {
 	display: flex;
+	flex-direction: column;
 	font-family: $sans-serif;
 	font-size: 11px;
 	margin-top: 10px;
 	margin-bottom: 10px;
+	justify-content: center;
+
+	ul {
+		display: flex;
+		flex-direction: row;
+	}
+
+	li:last-of-type {
+		border-right: 0;
+	}
 
 	li {
 		margin-left: 10px;
