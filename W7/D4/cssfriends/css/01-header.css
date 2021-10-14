@@ -1,0 +1,109 @@
+/* PHASE 1: Header */
+
+body {
+  font: 400 16px "Roboto", sans-serif;
+}
+
+h1 {
+  font-weight: bold;
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  padding: 11px 20px;
+  display: block;
+}
+
+a:hover {
+  background-color: black;
+}
+
+header nav ul {
+  border-right: solid 1px white;
+  position: relative;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0  -2px;
+  border-left: solid 1px white;
+}
+
+nav {
+  width: 900px;
+  display: flex;
+  align-items:center;
+  justify-content: space-between;
+}
+
+header {
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.badge {
+  display: inline;
+  font-size: 14px;
+  background-color: black;
+  padding: 1px 6px;
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+nav ul li ul {
+  display: block;
+  width: 100px;
+}
+
+.notif-items {
+  display: none;
+  position: absolute;
+  left: -1px;
+  font-size: 14px;
+  white-space: nowrap;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  overflow: hidden;
+
+}
+
+.header-list > li {
+  position: relative;
+}
+
+
+li:hover .notif-items {
+  display: block;
+}
+
+.notif-items > li {
+  border-top: 1px solid #ccc;
+  color: #000;
+}
+
+.notif-items > li:hover {
+  background: #eee;
+}
+
+/* .notif-items {
+  position: relative;
+  width: 100px;
+  background-color: black;
+}
+
+.notif-items:hover {
+  display: block;
+  width: 100px;
+  background-color: black;
+} */
