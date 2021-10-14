@@ -1,35 +1,47 @@
 .main-nav {
-
+  display: flex;
+  justify-content: space-between;
+  padding: 2px;
 }
 
 .left-nav > ul,
 .right-nav > ul {
-
+  display: flex;
+  align-items: center;
 }
 
 .left-nav {
 
   > ul {
     > li {
-
+      font-family: $sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin: 0 10px;
+      padding: 4px;
+    }
+    > li:hover {
+      background-color: $light-gray;
     }
   }
 
   span {
-
+    margin: 5px;
   }
 }
+
 
 .right-nav  {
 
   > ul {
 
-    > li {
-  
+    > li:last-of-type {
+      padding: 4px;
     }
 
-    > li:last-of-type {
-  
+    > li:last-of-type:hover {
+      background-color: $light-gray;
     }
   }
   
