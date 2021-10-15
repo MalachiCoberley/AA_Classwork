@@ -7,7 +7,14 @@ class User < ApplicationRecord
 
     after_initialize :ensure_session_token
 
-    has_many :subs
+    has_many :subs,
+    foreign_key: :moderator_id,
+    class_name: :Sub
+
+    has_many :posts,
+        foreign_key: :author_id,
+        class_name: :User
+        
     #SPIRE
 
     def self.find_by_credentials(username, password)

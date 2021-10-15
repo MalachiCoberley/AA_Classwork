@@ -1,8 +1,8 @@
 class SubsController < ApplicationController
-  before_action :require_moderator, only: [:create, :edit]
+  # before_action :require_moderator, only: [:update ,:edit]
 
   def index
-    @subs = Subs.all
+    @subs = Sub.all
     render :index
   end
 

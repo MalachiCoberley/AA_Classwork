@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def login(user)
     session[:session_token] = user.reset_session_token!
-    redirect_to users_url
+    redirect_to subs_url
   end
 
   def logged_in?
@@ -29,8 +29,13 @@ class ApplicationController < ActionController::Base
   end
 
   def require_moderator
-    current_sub = Sub.find(params[:id])
-    redirect_to subs_url unless (logged_in? && @current_user.id == current_sub.moderator_id)
+    current_sub = Sub.find_by(id: params[:id])
+    redirect_to subs_url unless (logged_in? && current_user.id == current_sub.moderator_id)
+  end
+
+  def require_author
+    current_post = Post.find(params[:id])
+    redirect_to subs_url unless (logged_in? && current_user.id == current_post.author_id)
   end
 
 end
