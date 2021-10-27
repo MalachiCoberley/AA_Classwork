@@ -1,3 +1,8 @@
 const FollowToggle = require("./follow_toggle.js")
 
-$(document).ready(function(){})
+$(document).ready(function(){
+  let buttons = $('.follow-toggle')
+  buttons.each(function(idx, button) {
+    
+  });
+})

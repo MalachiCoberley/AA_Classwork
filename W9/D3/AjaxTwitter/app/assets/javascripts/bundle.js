@@ -8,13 +8,14 @@
 /***/ ((module) => {
 
 // const ids = require("webpack");
-function FollowToggle(userId, initialFollowState) {
-  let button = $('.follow-toggle');
+function FollowToggle(button) {
   this.userId = button.data('user-id');
   this.followState = button.data('initial-follow-state');
 
 }
 const buttonInstance = $('button');
+
+// if (this.)
 
 module.exports = FollowToggle;
 
@@ -55,7 +56,12 @@ var __webpack_exports__ = {};
   \*****************************/
 const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js")
 
-$(document).ready(function(){})
+$(document).ready(function(){
+  let buttons = $('.follow-toggle')
+  buttons.each(function(idx, button) {
+    
+  });
+})
 })();
 
 /******/ })()
