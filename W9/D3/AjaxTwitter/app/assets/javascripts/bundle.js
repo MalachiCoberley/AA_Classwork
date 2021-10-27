@@ -59,7 +59,7 @@ const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/f
 $(document).ready(function(){
   let buttons = $('.follow-toggle')
   buttons.each(function(idx, button) {
-    
+    new FollowToggle(button);
   });
 })
 })();
