@@ -1,10 +1,10 @@
-const { ids } = require("webpack");
-
+// const ids = require("webpack");
 function FollowToggle(userId, initialFollowState) {
-  this.userId = userId;
-  this.followState = initialFollowState;
+  let button = $('.follow-toggle');
+  this.userId = button.data('user-id');
+  this.followState = button.data('initial-follow-state');
 
 }
-const el = $('el')
+const buttonInstance = $('button');
 
 module.exports = FollowToggle;

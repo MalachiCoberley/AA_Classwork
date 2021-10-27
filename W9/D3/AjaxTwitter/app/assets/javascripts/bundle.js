@@ -5,16 +5,16 @@
 /*!***********************************!*\
   !*** ./frontend/follow_toggle.js ***!
   \***********************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((module) => {
 
-const { ids } = __webpack_require__(Object(function webpackMissingModule() { var e = new Error("Cannot find module 'webpack'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
+// const ids = require("webpack");
 function FollowToggle(userId, initialFollowState) {
-  this.userId = userId;
-  this.followState = initialFollowState;
+  let button = $('.follow-toggle');
+  this.userId = button.data('user-id');
+  this.followState = button.data('initial-follow-state');
 
 }
-const el = $('el')
+const buttonInstance = $('button');
 
 module.exports = FollowToggle;
 
@@ -54,6 +54,8 @@ var __webpack_exports__ = {};
   !*** ./frontend/twitter.js ***!
   \*****************************/
 const FollowToggle = __webpack_require__(/*! ./follow_toggle.js */ "./frontend/follow_toggle.js")
+
+$(document).ready(function(){})
 })();
 
 /******/ })()
