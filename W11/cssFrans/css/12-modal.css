@@ -1,0 +1,45 @@
+/* PHASE 12: Modal */
+.modal {
+  display: none;
+}
+
+.modal-screen {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 2;
+  background-color: rgba(0,0,0,0.8);
+}
+
+.modal-form {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  width: 20vw;
+  border-radius: 5px;
+}
+
+.sign-in-form {
+  margin-top: 15px;
+}
+
+#close-button {
+  position: absolute;
+  font-size: 30px;
+  top: 0;
+  right: 5px;
+}
+
+#welcome-sign {
+  font-size: 35px;
+  font-weight: 100;
+}
+
+.is-open {
+  display:inherit;
+}
