@@ -1,4 +1,11 @@
 import { createStore } from "redux";
-import reducer from "./reducer";
+import rootReducer from "../reducers/root_reducer";
 
-const todoStore = 
+
+const configureStore = (preloadedState ={}) => {
+  const store = createStore(rootReducer, preloadedState);
+  return store;
+}
+
+
+export default configureStore;
