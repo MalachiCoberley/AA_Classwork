@@ -1,10 +1,14 @@
 import React from "react";
 import TodoListItem from './todo_list_item'
+import TodoForm from "./todo_form";
 
 export default (props) => {
   return (
-    <ul>
-      <TodoListItem props={props}/>
-    </ul>
+    <div>
+      <ul>
+        <TodoListItem/>
+      </ul>
+      <TodoForm/>
+    </div>
   )
 }
