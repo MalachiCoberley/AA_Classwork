@@ -24,6 +24,7 @@ const todosReducer = (state = initialState, action) => {
       }
       return nextState;
     case RECEIVE_TODO:
+      console.log('reducer', action)
       nextState[action.todo.id] = action.todo;
       return nextState
     case REMOVE_TODO:

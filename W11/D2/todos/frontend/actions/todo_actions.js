@@ -11,6 +11,7 @@ export const receiveTodos = (todos) => {
 }
 
 export const receiveTodo = (todo) => {
+  console.log('actions', todo)
   return {
     type: RECEIVE_TODO,
     todo
