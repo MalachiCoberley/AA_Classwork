@@ -5,7 +5,7 @@ import PokemonIndex from "./pokemon_index";
 
 const mapStateToProps = (state) => (
   {
-    pokemons: selectAllPokemon(state),
+    pokemon: selectAllPokemon(state),
   }
 );
 

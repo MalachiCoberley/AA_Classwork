@@ -7,9 +7,7 @@ const pokemonReducer = (state={}, action) => {
   switch(action.type){
     case RECEIVE_ALL_POKEMON:
       let nextState = {};
-      action.pokemon.forEach(poke => {
-        nextState[poke.id] = poke;
-      })
+      nextState = action.pokemon
       return nextState;
     default:
       return state;
