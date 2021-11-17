@@ -67,9 +67,9 @@ var logout = function logout() {
 
 /***/ }),
 
-/***/ "./frontend/components/App.jsx":
+/***/ "./frontend/components/app.jsx":
 /*!*************************************!*\
-  !*** ./frontend/components/App.jsx ***!
+  !*** ./frontend/components/app.jsx ***!
   \*************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -97,8 +97,11 @@ var App = function App() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/index.js");
-/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ "./frontend/components/App.jsx");
+/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app */ "./frontend/components/app.jsx");
 
 
 
@@ -106,8 +109,10 @@ var Root = function Root(_ref) {
   var store = _ref.store;
   return /*#__PURE__*/React.createElement(Provider, {
     store: store
-  }, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.HashRouter, null, /*#__PURE__*/React.createElement(_App__WEBPACK_IMPORTED_MODULE_0__["default"], null)));
+  }, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.HashRouter, null, /*#__PURE__*/React.createElement(_app__WEBPACK_IMPORTED_MODULE_0__["default"], null)));
 };
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Root);
 
 /***/ }),
 
